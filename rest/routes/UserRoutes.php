@@ -25,16 +25,4 @@ Flight::route('PUT /user/@id', function($id){
                   'data' => Flight::user_service()->update($request, $id)]);
 });
 
-Flight::route('POST /analyze', function() {
-    $request = Flight::request()->data->getData();
-    $text = $request['text'];
-    //putenv("PYTHONPATH=C:\Bitnami\wampstack-8.1.2-0\apache2\htdocs\SDP\env\Lib\site-packages");
-    putenv("PYTHONPATH=".__DIR__."/../env/lib/python3.9/site-packages");
-
-    $result = shell_exec(__DIR__.'/../env/bin/python ../model/script.py "'. $text . '"');
-    // $result = shell_exec('C:\Bitnami\wampstack-8.1.2-0\apache2\htdocs\SDP\env\Scripts\python.exe ../model/script.py "'. $text . '"');
-    $result = trim($result);
-    Flight::json([ 'message' => $result ]);
-});
-
 ?>

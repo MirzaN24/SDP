@@ -16,7 +16,7 @@ from tensorflow.keras.preprocessing.sequence import pad_sequences
 
 
 # Load the saved model
-loaded_model = keras.models.load_model('../model/model_mirza1.h5')
+loaded_model = keras.models.load_model('../model/model_mirza_fin.h5')
 
 # Initialize NLTK (download necessary resources if not already downloaded)
 nltk.download('punkt')
@@ -25,7 +25,7 @@ nltk.download('omw-1.4')
 nltk.download('wordnet')
 
 # Load the tokenizer from the file
-with open('../model/tokenizer1.pkl', 'rb') as tokenizer_file:
+with open('../model/tokenizerNEW.pkl', 'rb') as tokenizer_file:
   word_index = pickle.load(tokenizer_file)
 
 def remove_punctuations(text):
@@ -85,7 +85,7 @@ def predict(
     return "Negative"
 
   if predicted_label == 1:
-    return "Offensive Language"
+    return "Neutral"
 
   if predicted_label == 2:
     return "Positive"
