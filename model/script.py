@@ -95,7 +95,7 @@ def predict(
 import sys
 sentence_to_predict = sys.argv[1]
 
-print("The expression you entered seems to be", predict(
+print("The expression you entered seems to be: ", predict(
     sentence_to_predict,
     loaded_model,
     word_index
