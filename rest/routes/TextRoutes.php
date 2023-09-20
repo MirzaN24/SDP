@@ -37,4 +37,7 @@ Flight::route('POST /analyze', function() {
     Flight::json([ 'message' => $result ]);
 });
 
+Flight::route('GET /user_results', function($id){
+    Flight::json(Flight::text_service()->get_results_by_user_id($id));
+})
 ?>
