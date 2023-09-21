@@ -1,19 +1,96 @@
 <section id="analysis">
-  <div style="margin: 100px;">
+  <div style="display: flex; justify-content: center; margin-top: 20px;">
+    <h3>
+      HOW ARE YOU FEELING TODAY?
+    </h3>
+  </div>
+  <div style="margin: 50px;">
     <div class="mb-3">
       <div style="display: flex; justify-content: center;">
-        <textarea class="form-control" id="exampleFormControlTextarea1" rows="5" placeholder="Input your sample here..."
+        <textarea class="form-control" id="text" rows="5" placeholder="Input your sample here..."
           style="border: 2px solid #000; width: 500px; height: 300px;"></textarea>
       </div>
     </div>
     <div style="display: flex; justify-content: center;">
-      <button type="button" class="btn btn-outline-warning">Analyze</button>
+      <button type="button" onclick="analyze()" class="btn btn-outline-warning" style="margin-top: 20px;"
+        id="analyzeButton">ANALYZE
+        <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true" style="display: none;"></span>
+      </button>
     </div>
     <div style="display: flex; justify-content: center; margin-top: 20px;">
-      SENTIMENT OF YOUR TEXT IS:
-  </div>
+      SENTIMENT OF YOUR TEXT IS: <span id="sentiment" style="margin-left: 5px;"></span>
+    </div>
+    <div style="display: flex; justify-content: center; margin-top: 20px;">
+      <button id="savebutton" type="button" class="btn btn-outline-warning"
+        style="display: none;">SAVE</button>
+    </div>
 </section>
 
+
 <script>
-  //Ovdje dodaj service.init
+  function analyze() {
+
+    var content = $('#text').val();
+    var sendObject = {
+      "text": content
+    }
+    console.log(sendObject);
+
+    $('#analyzeButton .spinner-border').show();
+
+    $.ajax({
+      type: "POST",
+      url: 'rest/analyze',
+      data: JSON.stringify(sendObject),
+      contentType: "application/json",
+      dataType: "json",
+      beforeSend: function (xhr) {
+        xhr.setRequestHeader('Authorization', localStorage.getItem('token'));
+      },
+      success: function (data) {
+        $('#analyzeButton .spinner-border').hide();
+        $('#sentiment').text(data.message)
+        $('#savebutton').show().click(save_result());
+      }
+    })
+  }
+</script>
+
+<script>
+
+  //FIX
+
+  function save_result() {
+
+    console.log("save_result function called");
+    token = localStorage.getItem("token")
+    console.log(token);
+    //var token = atob(localStorage.getItem("token"));
+    
+
+    //var user_id = atob(token)
+    var content = $('#text').val();
+    var result = $('#sentiment').val();
+
+    var user = {
+      "user_id": user_id,
+      "content": content,
+      "result": result
+    }
+
+    $.ajax({
+      type: "POST",
+      url: 'rest/user_results',
+      data: JSON.stringify(user),
+      contentType: "application/json",
+      dataType: "json",
+      beforeSend: function (xhr) {
+        xhr.setRequestHeader('Authorization', localStorage.getItem('token'));
+      },
+      success: function (data) {
+        toastr.success("Result added successfully!!");
+      }
+    })
+  }
+
 </script>

@@ -11,7 +11,6 @@ var RegisterService = {
         }
         $('#register-form').validate({
             submitHandler: function (form) {
-                //var entity = Object.fromEntries((new FormData(form)).entries()); //converting form to JSON
                 var entity = {};
                 entity.username = $('#username').val();
                 entity.email = $('#email').val();
@@ -26,12 +25,8 @@ var RegisterService = {
         $.ajax({
           url: 'rest/register',
           type: 'POST',
-          //beforeSend: function(xhr){
-            //xhr.setRequestHeader('Authorization', localStorage.getItem('token'));
-          //},
           data: JSON.stringify(entity),
           contentType: "application/json",
-          //dataType: "json",
           success: function(result) {
             console.log(result);
             localStorage.setItem("token", result.token);

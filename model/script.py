@@ -82,20 +82,20 @@ def predict(
   predicted_label = np.argmax(prediction)
 
   if predicted_label == 0:
-    return "Negative"
+    return "NEGATIVE"
 
   if predicted_label == 1:
-    return "Neutral"
+    return "NEUTRAL"
 
   if predicted_label == 2:
-    return "Positive"
+    return "POSITIVE"
 
-  return "Positive"
+  return "POSITIVE"
 
 import sys
 sentence_to_predict = sys.argv[1]
 
-print("The expression you entered seems to be: ", predict(
+print(predict(
     sentence_to_predict,
     loaded_model,
     word_index
