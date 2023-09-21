@@ -40,5 +40,4 @@ var LoginService = {
         window.location.replace("login.html");
     }
 
-
 }

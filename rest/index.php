@@ -20,9 +20,9 @@ Flight::register('text_service', "TextService");
 require_once "routes/UserRoutes.php";
 require_once "routes/TextRoutes.php";
 
-Flight::map('error', function(Exception $ex){
+/*Flight::map('error', function(Exception $ex){
     Flight::json(['message' => $ex->getMessage()], 500);
-});
+}); */
 
 //middleware method for login and register
 

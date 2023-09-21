@@ -47,4 +47,18 @@ Flight::route('POST /login', function(){
 
 });
 
+Flight::route('POST /register', function(){
+    $data = Flight::request()->data->getData();
+    $data['password'] = md5($data['password']);
+    $user = Flight::user_service()->add($data);
+    Flight::json($user);
+
+  /*  try{
+      $user_dao = new UserDao();
+      Flight::json($user_dao->add(Flight::request()->data->getData()));
+    }catch (Exception $e) {
+      Flight::json(["message" => "Email is already in use"], 400);
+    }*/
+  }); 
+
 ?>
