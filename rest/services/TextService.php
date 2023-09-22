@@ -10,8 +10,8 @@ class TextService extends BaseService{
         parent::__construct(new TextDao);
     }
 
-    public function  get_results_by_user_id($id){
-        return $this->dao->get_results_by_user_id($id);
+    public function  get_results_by_user_id($user_id){
+        return $this->dao->get_results_by_user_id($user_id);
       }
     
 }

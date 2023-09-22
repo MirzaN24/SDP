@@ -28,7 +28,7 @@ require_once "routes/TextRoutes.php";
 
 Flight::route('/*', function(){
     $path = Flight::request()->url;
-    if($path == '/login' || $path == '/docs.json') return TRUE; //exclude /login, /docs.json and /register
+    if($path == '/login' || $path == '/register' || $path == '/docs.json') return TRUE; //exclude /login, /docs.json and /register
     $headers = getallheaders();
     if(@!$headers['Authorization']){
         Flight::json(["message" => "Authorization is missing!"], 403);
