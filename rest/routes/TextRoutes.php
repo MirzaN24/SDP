@@ -19,10 +19,16 @@ Flight::route('POST /text', function(){
                   'data' => Flight::text_service()->add($request)]);
 });
 
-Flight::route('PUT /text/@id', function($id){
+/*Flight::route('PUT /text/@id', function($id){
     $request = Flight::request()->data->getData();
     Flight::json(['message' => 'Text updated successfuly!',
                   'data' => Flight::text_service()->update($request, $id)]);
+}); */
+
+Flight::route('POST /save_results/@user_id', function($user_id){
+    $request = Flight::request()->data->getData();
+    Flight::json(['message' => 'Text added successfuly!',
+                  'data' => Flight::text_service()->add($request, $user_id)]);
 });
 
 Flight::route('POST /analyze', function() {
