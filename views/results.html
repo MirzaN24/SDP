@@ -36,15 +36,15 @@
       success: function (data) {
         $("#table_of_results").html("");
         var html = "";
+        html += `<tr>
+                <th scope="col" style="border: 1px solid #000; padding: 8px; text-align: center;">#</th>
+                <th scope="col" style="border: 1px solid #000; padding: 8px; text-align: center;">USERNAME</th>
+                <th scope="col" style="border: 1px solid #000; padding: 8px; text-align: center;">CONTENT</th>
+                <th scope="col" style="border: 1px solid #000; padding: 8px; text-align: center;">SENTIMENT</th>
+                <th scope="col" style="border: 1px solid #000; padding: 8px; text-align: center;">DELETE</th>
+              </tr>`;
         for (let i = 0; i < data.length; i++) {
           html += `<tr>
-                    <th scope="col" style="border: 1px solid #000; padding: 8px; text-align: center;">No</th>
-                    <th scope="col" style="border: 1px solid #000; padding: 8px; text-align: center;"">USERNAME</th>
-                    <th scope="col" style="border: 1px solid #000; padding: 8px; text-align: center;"">CONTENT</th>
-                    <th scope="col" style="border: 1px solid #000; padding: 8px; text-align: center;">SENTIMENT</th>
-                    <th scope="col" style="border: 1px solid #000; padding: 8px; text-align: center;">MORE</th>
-                  </tr>
-                    <tr>
                         <th scope="col" style="border: 1px solid #000; padding: 8px; text-align: center;">`+ i + ` </th>
                         <th scope="col" style="border: 1px solid #000; padding: 8px; text-align: center;">`+ data[i].username + ` </th>
                         <th scope="col" style="border: 1px solid #000; padding: 8px; text-align: center;">`+ data[i].content + ` </th>
@@ -53,7 +53,6 @@
                               <button type="button" class="btn btn-danger result-button" onclick="MembershipService.delete(`+ data[i].user_id + `)"></button>
                         </td>
             </tr>`;
-
         }
         $("#table_of_results").html(html);
       },
