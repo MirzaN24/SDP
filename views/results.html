@@ -50,7 +50,7 @@
                         <th scope="col" style="border: 1px solid #000; padding: 8px; text-align: center;">`+ data[i].content + ` </th>
                         <th scope="col" style="border: 1px solid #000; padding: 8px; text-align: center;">`+ data[i].result + ` </th>
                         <td style="text-align: center; border: 1px solid #000; padding: 8px;" scope="col">
-                              <button type="button" class="btn btn-danger result-button" onclick="MembershipService.delete(`+ data[i].user_id + `)"></button>
+                          <button type="button" class="btn btn-danger result-button" onclick="del(`+ data[i].id + `)"></button>
                         </td>
             </tr>`;
         }
@@ -73,10 +73,28 @@
     return JSON.parse(jsonPayload);
   }
 
-
-
   $(document).ready(function () {
     list(); // Call the list function when the page loads
   });
+</script>
 
+<script>
+    function del(){
+
+    $.ajax({
+      url: 'rest/text/' + id,
+      type: 'DELETE',
+      beforeSend: function (xhr) {
+        console.log(id);
+        xhr.setRequestHeader('Authorization', localStorage.getItem('token'));
+      },
+      success: function () {
+        list();
+        toastr.success("Deleted!");
+      },
+      error: function (XMLHttpRequest, textStatus, errorThrown) {
+        toastr.error(XMLHttpRequest.responseJSON.message);
+      }
+    });
+  }
 </script>

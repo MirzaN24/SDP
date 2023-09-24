@@ -11,7 +11,7 @@ var RegisterService = {
         }
         $('#register-form').validate({
             submitHandler: function (form) {
-                var entity = {};
+                var entity = Object.fromEntries((new FormData(form)).entries());
                 entity.username = $('#username').val();
                 entity.email = $('#email').val();
                 entity.password = $('#password').val();
@@ -22,19 +22,19 @@ var RegisterService = {
     },
 
     register: function(entity){
-        $.ajax({
-          url: 'rest/register',
-          type: 'POST',
-          data: JSON.stringify(entity),
-          contentType: "application/json",
-          success: function(result) {
-            console.log(result);
-            localStorage.setItem("token", result.token);
-            window.location.replace("index.html");
-          },
-          error: function(XMLHttpRequest, textStatus, errorThrown) {
-            toastr.error(XMLHttpRequest.responseJSON.message);
-          }
-        });
-      }
+      $.ajax({
+        url: 'rest/register',
+        type: 'POST',
+        data: JSON.stringify(entity),
+        contentType: "application/json",
+        success: function(result) {
+          console.log(result);
+          localStorage.setItem("token", result.token);
+          window.location.replace("index.html");
+        },
+        error: function(XMLHttpRequest, textStatus, errorThrown) {
+          toastr.error(XMLHttpRequest.responseJSON.message);
+        }
+      });
+    }
 }
