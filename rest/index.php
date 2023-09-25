@@ -9,8 +9,10 @@ use Firebase\JWT\JWT;
 use Firebase\JWT\Key;
 use Symfony\Component\Dotenv\Dotenv;
 
-$dotenv = new Dotenv();
-$dotenv->load(__DIR__.'/.env');
+if (!in_array('RENDER', $_ENV)) {
+    $dotenv = new Dotenv();
+    $dotenv->load(__DIR__.'/.env');
+}
 
 require("services/UserService.php");
 require("services/TextService.php");
