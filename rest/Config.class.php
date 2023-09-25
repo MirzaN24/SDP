@@ -22,6 +22,14 @@ class Config{
         return Config::get_env("DB_PORT", "");
     }
 
+    public static function PYTHON_PATH(){
+        return Config::get_env("PYTHON_PATH", "");
+    }
+
+    public static function ANALYSE_COMMAND(){
+        return Config::get_env("ANALYSE_COMMAND", "");
+    }
+
     public static function JWT_SECRET(){
         return Config::get_env("JWT_SECRET", "");
     }

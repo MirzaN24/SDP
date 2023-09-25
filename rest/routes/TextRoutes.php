@@ -34,11 +34,11 @@ Flight::route('POST /save_results/@user_id', function($user_id){
 Flight::route('POST /analyze', function() {
     $request = Flight::request()->data->getData();
     $text = $request['text'];
-    putenv("PYTHONPATH=C:\Bitnami\wampstack-8.1.2-0\apache2\htdocs\SDP\env\Lib\site-packages"); //ovo je na local testiranju
+    putenv(Config::PYTHON_PATH()); //ovo je na local testiranju
     //putenv("PYTHONPATH=".__DIR__."/../env/lib/python3.9/site-packages");
 
     //$result = shell_exec(__DIR__.'/../env/bin/python ../model/script.py "'. $text . '"');
-    $result = shell_exec('C:\Bitnami\wampstack-8.1.2-0\apache2\htdocs\SDP\env\Scripts\python.exe ../model/script.py "'. $text . '"'); //ovo je na local testiranju
+    $result = shell_exec(Config::ANALYSE_COMMAND() . ' ../model/script.py "'. $text . '"'); //ovo je na local testiranju
     $result = trim($result);
     Flight::json([ 'message' => $result ]);
 });
