@@ -63,7 +63,7 @@ def predict(
 
   
   # Tokenize the new text using NLTK
-  processed_text = sentence_to_predict #remove_stopwords(sentence_to_predict)
+  processed_text = remove_stopwords(sentence_to_predict)
   new_tokens = [word_tokenize(remove_punctuations(text.lower())) for text in [processed_text]]
 
   # Convert NLTK tokens to token IDs using the word index
