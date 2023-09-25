@@ -3,19 +3,20 @@
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
+require '../vendor/autoload.php';
 
 use Firebase\JWT\JWT;
 use Firebase\JWT\Key;
+use Symfony\Component\Dotenv\Dotenv;
 
-
-require '../vendor/autoload.php';
+$dotenv = new Dotenv();
+$dotenv->load(__DIR__.'/.env');
 
 require("services/UserService.php");
 require("services/TextService.php");
 
 Flight::register('user_service', "UserService");
 Flight::register('text_service', "TextService");
-
 
 require_once "routes/UserRoutes.php";
 require_once "routes/TextRoutes.php";
