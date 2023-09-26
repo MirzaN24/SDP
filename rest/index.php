@@ -9,10 +9,10 @@ use Firebase\JWT\JWT;
 use Firebase\JWT\Key;
 use Symfony\Component\Dotenv\Dotenv;
 
-if (!in_array('RENDER', $_ENV)) { //zakomentarisi kada budes pokazivao na renderu
-    $dotenv = new Dotenv();
-    $dotenv->load(__DIR__.'/.env');
-}
+//if (!in_array('RENDER', $_ENV)) { //zakomentarisi kada budes pokazivao na renderu
+//    $dotenv = new Dotenv();
+//    $dotenv->load(__DIR__.'/.env');
+//}
 
 require("services/UserService.php");
 require("services/TextService.php");
